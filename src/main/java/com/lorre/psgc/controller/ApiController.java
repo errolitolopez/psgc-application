@@ -22,13 +22,13 @@ public class ApiController {
 	private final ProvinceRepository provinceRepository;
 	private final MunicipalityRepository municipalityRepository;
 
-	@Cacheable("provinces")
+	@Cacheable(value = "provinces", sync = true)
 	@GetMapping("/psgc/provinces/region-code/{regionCode}")
 	private List<Province> findAllProvincesByRegionCode(@PathVariable(name = "regionCode") String regionCode) {
 		return provinceRepository.findAllByRegionCode(regionCode);
 	}
 
-	@Cacheable("municipalities")
+	@Cacheable(value = "municipalities", sync = true)
 	@GetMapping("/psgc/municipalities/province-code/{provinceCode}")
 	private List<Municipality> findAllMunicipalitiesByProvinceCode(
 			@PathVariable(name = "provinceCode") String provinceCode) {
