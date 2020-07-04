@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Users</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    </head>
+    <body>
+		    <table class="table table-striped table-responsive-md">
+		       <thead>
+		           <tr>
+		               <th>Name</th>
+		           </tr>
+		       </thead>
+		       <tbody>
+		           <tr th:each="province : ${provinces}">
+		               <td th:text="${province.name}"></td>
+		           </tr>
+		       </tbody>
+		   </table>
+ 	</body>
+ 
+ </html>
+ 
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>

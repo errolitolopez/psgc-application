@@ -25,6 +25,9 @@ dependencies {
 	
 	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.32.3'
 	compile group: 'com.github.gwenn', name: 'sqlite-dialect', version: '0.1.0'
+	compile group: 'org.webjars', name: 'bootstrap', version: '4.5.0'
+	compile group: 'org.webjars', name: 'webjars-locator', version: '0.40'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.3.1.RELEASE'
 	
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
