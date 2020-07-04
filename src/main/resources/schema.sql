@@ -26,3 +26,13 @@ CREATE TABLE "municipality" (
   "province_code" varchar(255), 
   "municipality_code" varchar(255)
 );
+
+DROP TABLE IF EXISTS "barangay";
+CREATE TABLE "barangay" (
+  "id" int(255) PRIMARY KEY,
+  "barangay_code" varchar(255),
+  "name" varchar(255),
+  "region_code" varchar(255),
+  "province_code" varchar(255), 
+  "municipality_code" varchar(255)
+);

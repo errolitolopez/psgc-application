@@ -20,9 +20,11 @@ public class PsgcController {
 		int regionCode = 0;
 		int provinceCode = 0;
 		int municipalityCode = 0;
+		int barangayCode = 0;
 		model.addAttribute("regionCode", regionCode);
 		model.addAttribute("provinceCode", provinceCode);
 		model.addAttribute("municipalityCode", municipalityCode);
+		model.addAttribute("barangayCode", barangayCode);
 		model.addAttribute("regions", regionRepository.findAll());
 		return "philippine-standard-geographic-code";
 	}

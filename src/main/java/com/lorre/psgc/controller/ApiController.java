@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lorre.psgc.model.Barangay;
 import com.lorre.psgc.model.Municipality;
 import com.lorre.psgc.model.Province;
+import com.lorre.psgc.repository.BarangayRepository;
 import com.lorre.psgc.repository.MunicipalityRepository;
 import com.lorre.psgc.repository.ProvinceRepository;
 
@@ -21,6 +23,7 @@ public class ApiController {
 
 	private final ProvinceRepository provinceRepository;
 	private final MunicipalityRepository municipalityRepository;
+	private final BarangayRepository barangayRepository;
 
 	@Cacheable(value = "provinces", sync = true)
 	@GetMapping("/psgc/provinces/region-code/{regionCode}")
@@ -33,5 +36,12 @@ public class ApiController {
 	private List<Municipality> findAllMunicipalitiesByProvinceCode(
 			@PathVariable(name = "provinceCode") String provinceCode) {
 		return municipalityRepository.findAllByProvinceCode(provinceCode);
+	}
+	
+	@Cacheable(value = "barangays", sync = true)
+	@GetMapping("/psgc/barangays/municipality-code/{municipalityCode}")
+	private List<Barangay> findAllBarangaysByMunicipalityCode(
+			@PathVariable(name = "municipalityCode") String municipalityCode) {
+		return barangayRepository.findAllByMunicipalityCode(municipalityCode);
 	}
 }

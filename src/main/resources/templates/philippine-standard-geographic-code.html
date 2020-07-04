@@ -10,6 +10,7 @@
     </head>
     <body>
 		   <div class="container mt-5" th:disabled="disabled">
+		   		<label for="regionCode">Region</label>
                  <select id="regionCode" th:field="*{regionCode}" class="custom-select">
                       <option value="" > -- </option>
                       <option th:each="region : ${regions}" th:value="${region.regionCode}" th:utext="${region.name}"/>
@@ -17,13 +18,22 @@
 		   </div>
 		   
    		   <div class="container mt-5" >
+ 		   		 <label for="provinceCode">Province</label>
                  <select id="provinceCode" th:field="*{provinceCode}" class="custom-select">
                       <option value=""> -- </option>
                </select>
 		   </div>
 		   
    		   <div class="container mt-5">
+		    	<label for="municipalityCode">City/Municipality</label>
                  <select id="municipalityCode" th:field="*{municipalityCode}" class="custom-select">
+                      <option value=""> -- </option>
+               </select>
+		   </div>
+		   
+    		<div class="container mt-5">
+    			<label for="barangayCode">Barangay</label>
+                 <select id="barangayCode" th:field="*{barangayCode}" class="custom-select">
                       <option value=""> -- </option>
                </select>
 		   </div>
@@ -39,14 +49,21 @@
 	$(document).ready(function() {
  		$("#provinceCode").prop("disabled", true);
  		$("#municipalityCode").prop("disabled", true);
+ 		$("#barangayCode").prop("disabled", true);
 	});
 	
 	$("#regionCode").change(function(e) {
 		$("#provinceCode").empty();
 		$("#municipalityCode").empty();
+		$("#barangayCode").empty();
+		
 		$("#municipalityCode").append("<option value=''> -- </option>");
 		$("#provinceCode").append("<option value=''> -- </option>");
+		$("#barangayCode").append("<option value=''> -- </option>");
+		
 		$("#municipalityCode").prop("disabled", true);
+		$("#barangayCode").prop("disabled", true);
+		
  		var regionCode = $("#regionCode").val();
  	 	if (regionCode != "") {
  	 		$.get( "/psgc/provinces/region-code/" + regionCode, function(data) {
@@ -54,10 +71,7 @@
  	 				var option = "<option value="+ item.provinceCode +">" + item.name +  "</option>";
   					$("#provinceCode").append(option);
   					});
- 	 			
- 	 	 		setTimeout(function() {
  	 	 			$("#provinceCode").prop("disabled", false);
- 	 	 			}, 1000);
  	 			});
  	 		} else {
  	 			$("#provinceCode").prop("disabled", true);
@@ -66,7 +80,11 @@
 	
 	$("#provinceCode").change(function(e) {
 		$("#municipalityCode").empty();
+		$("#barangayCode").empty();
+		
 		$("#municipalityCode").append("<option value=''> -- </option>");
+		$("#barangayCode").append("<option value=''> -- </option>");
+		
  		var provinceCode = $("#provinceCode").val();
  	 	if (provinceCode != "") {
  	 		$.get( "/psgc/municipalities/province-code/" + provinceCode, function(data) {
@@ -74,13 +92,30 @@
  	 				var option = "<option value="+ item.municipalityCode +">" + item.name +  "</option>";
   					$("#municipalityCode").append(option);
   					});
- 	 			
- 	 	 		setTimeout(function() {
  	 	 			$("#municipalityCode").prop("disabled", false);
- 	 	 			}, 1000);
  	 			});
  	 		} else {
  				$("#municipalityCode").prop("disabled", true);
+ 				$("#barangayCode").prop("disabled", true);
+ 	 		}
+ 	 	});
+	
+	$("#municipalityCode").change(function(e) {
+		
+		$("#barangayCode").empty();
+		$("#barangayCode").append("<option value=''> -- </option>");
+		
+ 		var municipalityCode = $("#municipalityCode").val();
+ 	 	if (municipalityCode != "") {
+ 	 		$.get( "/psgc/barangays/municipality-code/" + municipalityCode, function(data) {
+ 	 			data.forEach(function(item, i) {
+ 	 				var option = "<option value="+ item.barangayCode +">" + item.name +  "</option>";
+  					$("#barangayCode").append(option);
+  					});
+ 	 	 			$("#barangayCode").prop("disabled", false);
+ 	 			});
+ 	 		} else {
+ 				$("#barangayCode").prop("disabled", true);
  	 		}
  	 	});
 </script>
