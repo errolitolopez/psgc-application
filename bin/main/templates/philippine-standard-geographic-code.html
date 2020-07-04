@@ -9,34 +9,67 @@
         <link rel="stylesheet" th:href="@{/styles/css/style.css}"  />
     </head>
     <body>
+    
+		  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+		   <div class="container">
+		     <a class="navbar-brand js-scroll-trigger" href="#">Philippine Standard Geographic Code</a>
+		   </div>
+		 </nav>
 		   <div class="container mt-5" th:disabled="disabled">
-		   		<label for="regionCode">Region</label>
+		     		         <div class="row">
+		        	<div class="col-lg-8 mx-auto">
+		   		<label class="mt-5" for="regionCode">Region</label>
                  <select id="regionCode" th:field="*{regionCode}" class="custom-select">
                       <option value="" > -- </option>
                       <option th:each="region : ${regions}" th:value="${region.regionCode}" th:utext="${region.name}"/>
                </select>
+               </div>
+               </div>
 		   </div>
 		   
    		   <div class="container mt-5" >
+  		         <div class="row">
+		        	<div class="col-lg-8 mx-auto">
  		   		 <label for="provinceCode">Province</label>
                  <select id="provinceCode" th:field="*{provinceCode}" class="custom-select">
                       <option value=""> -- </option>
                </select>
+               		   </div>
+		   		   </div>
 		   </div>
 		   
    		   <div class="container mt-5">
-		    	<label for="municipalityCode">City/Municipality</label>
-                 <select id="municipalityCode" th:field="*{municipalityCode}" class="custom-select">
-                      <option value=""> -- </option>
-               </select>
+            	<div class="row">
+		        	<div class="col-lg-8 mx-auto">
+        			    <label for="municipalityCode">City/Municipality</label>
+		                 <select id="municipalityCode" th:field="*{municipalityCode}" class="custom-select">
+		                      <option value=""> -- </option>
+		               </select>
+		        	</div>
+	        	</div>
 		   </div>
 		   
     		<div class="container mt-5">
-    			<label for="barangayCode">Barangay</label>
-                 <select id="barangayCode" th:field="*{barangayCode}" class="custom-select">
-                      <option value=""> -- </option>
-               </select>
+				<div class="row">
+		        	<div class="col-lg-8 mx-auto">
+	    			<label for="barangayCode">Barangay</label>
+	                 <select id="barangayCode" th:field="*{barangayCode}" class="custom-select">
+	                      <option value=""> -- </option>
+	               </select>
+	               </div>
+               </div>
 		   </div>
+		   
+		    <section id="about">
+		    <div class="container mt-5">
+		      <div class="row">
+		        <div class="col-lg-8 mx-auto">
+		          <h2>About this page</h2>
+		          <p class="lead">This site is for educational purpose only.</p>
+		        </div>
+		      </div>
+		    </div>
+		  </section>
  	</body>
  
  </html>
