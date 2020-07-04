@@ -3,7 +3,6 @@ package com.lorre.psgc.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +26,8 @@ public class ApiController {
 		return provinceRepository.findAll();
 	};
 
-	@GetMapping("/psgc/municipalities/province-id/{province_id}")
-	private List<Municipality> findAllMunicipalitiesByProvinceId(@PathVariable(name = "province_id") int provinceId) {
+	@GetMapping("/psgc/municipalities/province-id/{provinceId}")
+	private List<Municipality> findAllMunicipalitiesByProvinceId(@PathVariable(name = "provinceId") int provinceId) {
 		return municipalityRepository.findAllByProvinceId(provinceId);
 	}
 }
