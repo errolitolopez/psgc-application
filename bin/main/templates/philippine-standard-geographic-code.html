@@ -54,8 +54,11 @@
  	 				var option = "<option value="+ item.provinceCode +">" + item.name +  "</option>";
   					$("#provinceCode").append(option);
   					});
+ 	 			
+ 	 	 		setTimeout(function() {
+ 	 	 			$("#provinceCode").prop("disabled", false);
+ 	 	 			}, 1000);
  	 			});
- 	 		$("#provinceCode").prop("disabled", false);
  	 		} else {
  	 			$("#provinceCode").prop("disabled", true);
  	 		}
@@ -71,8 +74,11 @@
  	 				var option = "<option value="+ item.municipalityCode +">" + item.name +  "</option>";
   					$("#municipalityCode").append(option);
   					});
+ 	 			
+ 	 	 		setTimeout(function() {
+ 	 	 			$("#municipalityCode").prop("disabled", false);
+ 	 	 			}, 1000);
  	 			});
- 			$("#municipalityCode").prop("disabled", false);
  	 		} else {
  				$("#municipalityCode").prop("disabled", true);
  	 		}
