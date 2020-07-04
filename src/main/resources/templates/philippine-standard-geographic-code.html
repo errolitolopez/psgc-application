@@ -9,14 +9,14 @@
         <link rel="stylesheet" th:href="@{/styles/css/style.css}"  />
     </head>
     <body>
-		   <div class="container mt-5">
+		   <div class="container mt-5" th:disabled="disabled">
                  <select id="regionCode" th:field="*{regionCode}" class="custom-select">
-                      <option value=""> -- </option>
+                      <option value="" > -- </option>
                       <option th:each="region : ${regions}" th:value="${region.regionCode}" th:utext="${region.name}"/>
                </select>
 		   </div>
 		   
-   		   <div class="container mt-5">
+   		   <div class="container mt-5" >
                  <select id="provinceCode" th:field="*{provinceCode}" class="custom-select">
                       <option value=""> -- </option>
                </select>
@@ -36,17 +36,28 @@
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+ 		$("#provinceCode").prop("disabled", true);
+ 		$("#municipalityCode").prop("disabled", true);
+	});
+	
 	$("#regionCode").change(function(e) {
 		$("#provinceCode").empty();
+		$("#municipalityCode").empty();
+		$("#municipalityCode").append("<option value=''> -- </option>");
 		$("#provinceCode").append("<option value=''> -- </option>");
+		$("#municipalityCode").prop("disabled", true);
  		var regionCode = $("#regionCode").val();
  	 	if (regionCode != "") {
+ 	 		$("#provinceCode").prop("disabled", false);
  	 		$.get( "/psgc/provinces/region-code/" + regionCode, function(data) {
  	 			data.forEach(function(item, i) {
  	 				var option = "<option value="+ item.provinceCode +">" + item.name +  "</option>";
   					$("#provinceCode").append(option);
   					});
  	 			});
+ 	 		} else {
+ 	 			$("#provinceCode").prop("disabled", true);
  	 		}
  	 	});
 	
@@ -55,12 +66,15 @@
 		$("#municipalityCode").append("<option value=''> -- </option>");
  		var provinceCode = $("#provinceCode").val();
  	 	if (provinceCode != "") {
+ 			$("#municipalityCode").prop("disabled", false);
  	 		$.get( "/psgc/municipalities/province-code/" + provinceCode, function(data) {
  	 			data.forEach(function(item, i) {
  	 				var option = "<option value="+ item.municipalityCode +">" + item.name +  "</option>";
   					$("#municipalityCode").append(option);
   					});
  	 			});
+ 	 		} else {
+ 				$("#municipalityCode").prop("disabled", true);
  	 		}
  	 	});
 </script>
