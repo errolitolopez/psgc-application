@@ -49,13 +49,13 @@
 		$("#municipalityCode").prop("disabled", true);
  		var regionCode = $("#regionCode").val();
  	 	if (regionCode != "") {
- 	 		$("#provinceCode").prop("disabled", false);
  	 		$.get( "/psgc/provinces/region-code/" + regionCode, function(data) {
  	 			data.forEach(function(item, i) {
  	 				var option = "<option value="+ item.provinceCode +">" + item.name +  "</option>";
   					$("#provinceCode").append(option);
   					});
  	 			});
+ 	 		$("#provinceCode").prop("disabled", false);
  	 		} else {
  	 			$("#provinceCode").prop("disabled", true);
  	 		}
@@ -66,13 +66,13 @@
 		$("#municipalityCode").append("<option value=''> -- </option>");
  		var provinceCode = $("#provinceCode").val();
  	 	if (provinceCode != "") {
- 			$("#municipalityCode").prop("disabled", false);
  	 		$.get( "/psgc/municipalities/province-code/" + provinceCode, function(data) {
  	 			data.forEach(function(item, i) {
  	 				var option = "<option value="+ item.municipalityCode +">" + item.name +  "</option>";
   					$("#municipalityCode").append(option);
   					});
  	 			});
+ 			$("#municipalityCode").prop("disabled", false);
  	 		} else {
  				$("#municipalityCode").prop("disabled", true);
  	 		}
