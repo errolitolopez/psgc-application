@@ -11,6 +11,12 @@ public class ProvinceMapper implements RowMapper<Province> {
 
 	@Override
 	public Province mapRow(ResultSet rs, int rowNum) throws SQLException {
-		return new Province(rs.getInt("id"), rs.getString("name"));
+		Province province = new Province();
+		province.setId(rs.getInt("id"));
+		province.setPsgcCode(rs.getString("psgc_code"));
+		province.setName(rs.getString("name"));
+		province.setRegionCode(rs.getString("region_code"));
+		province.setProvinceCode(rs.getString("province_code"));
+		return province;
 	}
 }

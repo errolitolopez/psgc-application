@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Province {
-
+	
 	private int id;
+	private String psgcCode;
 	private String name;
+	private String regionCode;
+	private String provinceCode;
 }

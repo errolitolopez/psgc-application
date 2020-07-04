@@ -1,10 +1,8 @@
 package com.lorre.psgc.repository.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -22,25 +20,12 @@ public class IMunicipalityRepository implements MunicipalityRepository {
 
 	@Override
 	public List<Municipality> findAll() {
-		return jdbcTemplate.query("SELECT * FROM MUNICIPALITY", new MunicipalityMapper());
+		return jdbcTemplate.query("SELECT * FROM MUNICIPALITY ORDER BY NAME ASC", new MunicipalityMapper());
 	}
 
 	@Override
-	public Optional<Municipality> findById(int id) {
-		String sql = "SELECT * FROM MUNICIPALITY WHERE ID = ?";
-		try {
-
-			return Optional.of(jdbcTemplate.queryForObject(sql, new Object[] { id }, new MunicipalityMapper()));
-
-		} catch (EmptyResultDataAccessException e) {
-
-			return Optional.empty();
-		}
-	}
-
-	@Override
-	public List<Municipality> findAllByProvinceId(int id) {
-		String sql = "SELECT * FROM MUNICIPALITY WHERE PROVINCE_ID = ?";
-		return jdbcTemplate.query(sql, new Object[] { id }, new MunicipalityMapper());
+	public List<Municipality> findAllByProvinceCode(String provinceCode) {
+		String sql = "SELECT * FROM MUNICIPALITY WHERE PROVINCE_CODE = ? ORDER BY NAME ASC";
+		return jdbcTemplate.query(sql, new Object[] { provinceCode }, new MunicipalityMapper());
 	}
 }

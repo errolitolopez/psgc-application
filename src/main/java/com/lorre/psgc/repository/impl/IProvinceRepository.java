@@ -1,10 +1,8 @@
 package com.lorre.psgc.repository.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +20,12 @@ public class IProvinceRepository implements ProvinceRepository {
 
 	@Override
 	public List<Province> findAll() {
-		return jdbcTemplate.query("SELECT * FROM PROVINCE", new ProvinceMapper());
+		return jdbcTemplate.query("SELECT * FROM PROVINCE ORDER BY NAME ASC", new ProvinceMapper());
 	}
 
 	@Override
-	public Optional<Province> findById(int id) {
-		String sql = "SELECT * FROM PROVINCE WHERE ID = ?";
-		try {
-
-			return Optional.of(jdbcTemplate.queryForObject(sql, new Object[] { id }, new ProvinceMapper()));
-
-		} catch (EmptyResultDataAccessException e) {
-
-			return Optional.empty();
-		}
+	public List<Province> findAllByRegionCode(String regionCode) {
+		String sql = "SELECT * FROM MUNICIPALITY WHERE REGION_CODE = ? ORDER BY NAME ASC";
+		return jdbcTemplate.query(sql, new Object[] { regionCode }, new ProvinceMapper());
 	}
 }

@@ -11,6 +11,12 @@ public class MunicipalityMapper implements RowMapper<Municipality> {
 
 	@Override
 	public Municipality mapRow(ResultSet rs, int rowNum) throws SQLException {
-		return new Municipality(rs.getInt("id"), rs.getString("name"), rs.getInt("province_id"), rs.getInt("zipcode"));
+		Municipality municipality = new Municipality();
+		municipality.setId(rs.getInt("id"));
+		municipality.setPsgcCode(rs.getString("psgc_code"));
+		municipality.setName(rs.getString("name"));
+		municipality.setRegionCode(rs.getString("region_code"));
+		municipality.setMunicipalityCode(rs.getString("municipality_code"));
+		return municipality;
 	}
 }

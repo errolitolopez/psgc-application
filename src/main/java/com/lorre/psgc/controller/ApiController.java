@@ -21,13 +21,14 @@ public class ApiController {
 	private final ProvinceRepository provinceRepository;
 	private final MunicipalityRepository municipalityRepository;
 
-	@GetMapping("/psgc/provinces")
-	private List<Province> findAllProvinces() {
-		return provinceRepository.findAll();
-	};
+	@GetMapping("/psgc/provinces/region-code/{regionCode}")
+	private List<Province> findAllProvincesByRegionCode(@PathVariable(name = "regionCode") String regionCode) {
+		return provinceRepository.findAllByRegionCode(regionCode);
+	}
 
-	@GetMapping("/psgc/municipalities/province-id/{provinceId}")
-	private List<Municipality> findAllMunicipalitiesByProvinceId(@PathVariable(name = "provinceId") int provinceId) {
-		return municipalityRepository.findAllByProvinceId(provinceId);
+	@GetMapping("/psgc/municipalities/province-code/{provinceCode}")
+	private List<Municipality> findAllMunicipalitiesByProvinceCode(
+			@PathVariable(name = "provinceCode") String provinceCode) {
+		return municipalityRepository.findAllByProvinceCode(provinceCode);
 	}
 }

@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Municipality {
-	
+public class Region {
+
 	private int id;
 	private String psgcCode;
 	private String name;
 	private String regionCode;
-	private String provinceCode;
-	private String municipalityCode;
 }
