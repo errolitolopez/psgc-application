@@ -25,7 +25,7 @@ public class IProvinceRepository implements ProvinceRepository {
 
 	@Override
 	public List<Province> findAllByRegionCode(String regionCode) {
-		String sql = "SELECT * FROM PROVINCES WHERE REGION_CODE = ? ORDER BY NAME ASC";
+		String sql = "SELECT * FROM PROVINCE WHERE REGION_CODE = ? ORDER BY NAME ASC";
 		return jdbcTemplate.query(sql, new Object[] { regionCode }, new ProvinceMapper());
 	}
 }
