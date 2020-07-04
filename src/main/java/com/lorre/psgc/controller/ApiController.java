@@ -3,6 +3,7 @@ package com.lorre.psgc.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,11 +22,13 @@ public class ApiController {
 	private final ProvinceRepository provinceRepository;
 	private final MunicipalityRepository municipalityRepository;
 
+	@Cacheable("provinces")
 	@GetMapping("/psgc/provinces/region-code/{regionCode}")
 	private List<Province> findAllProvincesByRegionCode(@PathVariable(name = "regionCode") String regionCode) {
 		return provinceRepository.findAllByRegionCode(regionCode);
 	}
 
+	@Cacheable("municipalities")
 	@GetMapping("/psgc/municipalities/province-code/{provinceCode}")
 	private List<Municipality> findAllMunicipalitiesByProvinceCode(
 			@PathVariable(name = "provinceCode") String provinceCode) {
